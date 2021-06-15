@@ -2,7 +2,8 @@ import inspect
 import re
 import itertools
 import copy
-import problema_espacio_estados as probee
+import PlanificacionAutomatica.problema_espacio_estados as probee
+
 
 
 class Predicado:
