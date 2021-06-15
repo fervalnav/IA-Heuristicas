@@ -1,5 +1,6 @@
 import PlanificacionAutomatica.problema_planificación_pddl as probpl
 import PlanificacionAutomatica.búsqueda_espacio_estados as búsqee
+import Heuristicas
 
 
 bloques = {'A', 'B', 'C'}
@@ -91,5 +92,7 @@ problema_mundo_bloques = probpl.ProblemaPlanificación(
 print(f'Estado inicial:\n{estado_inicial_bloques}')
 print(f'Objetivos positivos: {problema_mundo_bloques.objetivosP}')
 print(f'Objetivos negativos: {problema_mundo_bloques.objetivosN}')
-búsqee.BúsquedaEnProfundidad.buscar(problema_mundo_bloques)
-
+# búsqee.BúsquedaEnProfundidad.buscar(problema_mundo_bloques)
+Heuristicas.acciones=[apilar, desapilar, agarrar, bajar]
+result=Heuristicas.prego(estado_inicial_bloques, sobre('A','B'))
+print(result)
