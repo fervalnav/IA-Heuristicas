@@ -13,7 +13,7 @@ class Predicado:
         self.signo = True
 
     def __str__(self):
-        if self.name is None:
+        if self.name is not None:
             ans = []
             frame = inspect.currentframe().f_back
             tmp = dict(frame.f_globals.items())
