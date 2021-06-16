@@ -89,10 +89,17 @@ problema_mundo_bloques = probpl.ProblemaPlanificación(
 )
 
 
-print(f'Estado inicial:\n{estado_inicial_bloques}')
-print(f'Objetivos positivos: {problema_mundo_bloques.objetivosP}')
-print(f'Objetivos negativos: {problema_mundo_bloques.objetivosN}')
+# print(f'Estado inicial:\n{estado_inicial_bloques}')
+# print(f'Objetivos positivos: {problema_mundo_bloques.objetivosP}')
+# print(f'Objetivos negativos: {problema_mundo_bloques.objetivosN}')
 # búsqee.BúsquedaEnProfundidad.buscar(problema_mundo_bloques)
-Heuristicas.acciones=[apilar, desapilar, agarrar, bajar]
+
+
+
+
+Heuristicas.esquemas=[apilar, desapilar, agarrar, bajar]
 result=Heuristicas.prego(estado_inicial_bloques, sobre('A','B'))
-print(result)
+# [print(i) for i in result]
+print(result[0])
+
+
