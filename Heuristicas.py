@@ -5,44 +5,31 @@ import PlanificacionAutomatica.problema_planificación_pddl as probpl
 
 # def Heuristica(e, p):
 #     if()
-esquemas=[]
+problema= None
 
 
 def prego(e, p):
     print(e)
     print(p)
-
     if e.satisface_positivas(p):
         return []
     else:
-        result=[]
-        for esquema in esquemas:
-            acciones=esquema.obtener_acciones()
-            for a in acciones:
-                if p not in a.efectosP:
-                    result.append(a)
-
-        # accionesP=[]
-        # for a in acciones:
-        #     for x in a.obtener_acciones():
-        #         for key in p:
-        #             if key in x.efectosP.keys():
-        #                 print('a')
-        #                 print(p)
-        #                 print(x.efectosP)
-        #                 if p[key] in x.efectosP[key]:
-        #                     print('b')
-        #                     accionesP.append(x.nombre)
-        if len(result)==0:
-            print('He entrado en len=0')
-            return esquemas
+        posibleAccion=[]
+        for accion in problema.acciones:
+            if p.items() in accion.efectosP.items():
+                posibleAccion.append(accion)
+        if len(posibleAccion)==0:
+                print('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
+                return problema.acciones
         else:
             options=[]
-            for a in result:
-                option=[a]
-                for pre in a.precondicionesP:
-                    option.append(prego(e, pre))
-                options.append(option)
+            print(posibleAccion)
+            for accion in posibleAccion:
+                results=[accion]
+                for pre in accion.precondicionesP:  
+                    results.append(prego(pre))
+                options.append(results)
+
             minValue=None
             minIndex=None
             for o in options:

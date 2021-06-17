@@ -97,9 +97,9 @@ problema_mundo_bloques = probpl.ProblemaPlanificación(
 
 
 
-Heuristicas.esquemas=[apilar, desapilar, agarrar, bajar]
+Heuristicas.problema=problema_mundo_bloques
 result=Heuristicas.prego(estado_inicial_bloques, sobre('A','B'))
 # [print(i) for i in result]
-print(result[0])
+
 
 
