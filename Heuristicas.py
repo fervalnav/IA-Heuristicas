@@ -2,32 +2,41 @@ from re import X
 import PlanificacionAutomatica.problema_espacio_estados as probee
 import PlanificacionAutomatica.problema_planificación_pddl as probpl
 
-
 # def Heuristica(e, p):
 #     if()
 problema= None
-
+predicados = []
 
 def prego(e, p):
-    print(e)
-    print(p)
+    print('Estado incial: \n', e)
+    print('Objetivo: \n', p)
     if e.satisface_positivas(p):
         return []
     else:
         posibleAccion=[]
         for accion in problema.acciones:
-            if p.items() in accion.efectosP.items():
-                posibleAccion.append(accion)
+            for clave in p:
+                if clave in accion.efectosP.keys() and p[clave]==accion.efectosP[clave]: 
+                        print("Acciones: ", accion.efectosP[clave])
+                        print('Objetivo: ', p[clave])
+                        posibleAccion.append(accion)
         if len(posibleAccion)==0:
-                print('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
                 return problema.acciones
         else:
             options=[]
-            print(posibleAccion)
             for accion in posibleAccion:
                 results=[accion]
+                print(accion.precondicionesP)
                 for pre in accion.precondicionesP:  
-                    results.append(prego(pre))
+                    for i in predicados:
+                        if(i.name==pre):
+                            print('Aqui')
+                            letras = []
+                            for x in accion.precondicionesP[pre]:
+                                for j in x:
+                                    letras.append("'" + j + "'")
+                            print(letras)
+                            results.append(prego(e, i(*letras)))
                 options.append(results)
 
             minValue=None

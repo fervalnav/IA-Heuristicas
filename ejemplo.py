@@ -3,12 +3,15 @@ import PlanificacionAutomatica.búsqueda_espacio_estados as búsqee
 import Heuristicas
 
 
+
 bloques = {'A', 'B', 'C'}
 despejado = probpl.Predicado(bloques)
 brazolibre = probpl.Predicado({})
 sobrelamesa = probpl.Predicado(bloques)
 sobre = probpl.Predicado(bloques, bloques)
 agarrado = probpl.Predicado(bloques)
+
+Heuristicas.predicados = [despejado, brazolibre, sobrelamesa, sobre, agarrado]
 
 estado_inicial_bloques = probpl.Estado(
     sobrelamesa('A'), despejado('A'),
@@ -99,7 +102,7 @@ problema_mundo_bloques = probpl.ProblemaPlanificación(
 
 Heuristicas.problema=problema_mundo_bloques
 result=Heuristicas.prego(estado_inicial_bloques, sobre('A','B'))
-# [print(i) for i in result]
+[print(i) for i in result]
 
 
 

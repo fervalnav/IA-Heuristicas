@@ -11,6 +11,7 @@ class Predicado:
         self.dominios = [] if dominios == ({},) else list(dominios)
         self.name = None
         self.signo = True
+        
 
     def __str__(self):
         if self.name is not None:
@@ -45,10 +46,11 @@ class Predicado:
                         ans.append(k)
             self.name = ans[0]
         diccionario = {}
-        if (len(self.dominios) == len(argumentos) and
-            all(arg in dom
-                for arg, dom in zip(argumentos, self.dominios)
-                if not re.fullmatch('{[^}]+}', arg))):
+        if (len(self.dominios) == len(argumentos)): 
+                # and all(arg in dom
+                # for arg, dom in zip(argumentos, self.dominios)
+                # if not re.fullmatch('{[^}]+}', arg))
+                
                 # [argumentos[i] in self.dominios[i]
                 #  for i in range(len(argumentos))
                 #  if not re.fullmatch('{[^}]+}',argumentos[i])])):
@@ -127,9 +129,9 @@ class AcciónPlanificación(probee.Acción):
                  precondicionesP=None, precondicionesN=None,
                  efectosP=None, efectosN=None, coste=1):
         self.nombre = nombre
-        self.precondicionesP = agrupar_diccionarios(precondicionesP)
+        self.precondicionesP = precondicionesP
         self.precondicionesN = agrupar_diccionarios(precondicionesN)
-        self.efectosP = agrupar_diccionarios(efectosP)
+        self.efectosP = efectosP
         self.efectosN = agrupar_diccionarios(efectosN)
         self.coste = coste
 
