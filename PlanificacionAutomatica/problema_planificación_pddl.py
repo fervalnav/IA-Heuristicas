@@ -129,9 +129,9 @@ class AcciónPlanificación(probee.Acción):
                  precondicionesP=None, precondicionesN=None,
                  efectosP=None, efectosN=None, coste=1):
         self.nombre = nombre
-        self.precondicionesP = precondicionesP
+        self.precondicionesP = agrupar_diccionarios(precondicionesP)
         self.precondicionesN = agrupar_diccionarios(precondicionesN)
-        self.efectosP = efectosP
+        self.efectosP = agrupar_diccionarios(efectosP)
         self.efectosN = agrupar_diccionarios(efectosN)
         self.coste = coste
 

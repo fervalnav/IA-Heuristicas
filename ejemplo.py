@@ -102,7 +102,8 @@ problema_mundo_bloques = probpl.ProblemaPlanificación(
 
 Heuristicas.problema=problema_mundo_bloques
 result=Heuristicas.prego(estado_inicial_bloques, sobre('A','B'))
-[print(i) for i in result]
-
+for i in result:
+    print(i)
+    
 
 
