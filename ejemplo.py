@@ -102,7 +102,11 @@ problema_mundo_bloques = probpl.ProblemaPlanificación(
 
 
 new.problema=problema_mundo_bloques
-result=new.prego(estado_inicial_bloques, sobre('A','B'))
+predicado = sobrelamesa('C')
+new.ultimo_estado = probpl.Estado(
+    predicado
+)
+result=new.prego(estado_inicial_bloques, predicado)
 for i in result:
     print(i)
     
