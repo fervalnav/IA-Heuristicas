@@ -1,6 +1,8 @@
 import PlanificacionAutomatica.problema_planificación_pddl as probpl
 import PlanificacionAutomatica.búsqueda_espacio_estados as búsqee
-import new
+import Prego
+import Heuristicas
+import auxiliares
 
 ruedas = {'rueda-pinchada', 'rueda-repuesto'}
 localizaciones = {'eje', 'maletero', 'suelo'}
@@ -9,7 +11,7 @@ en = probpl.Predicado(ruedas, localizaciones)
 estado_inicial_rueda = probpl.Estado(en('rueda-pinchada', 'eje'),
                                      en('rueda-repuesto', 'maletero'))
 
-                                     # Sacar la rueda de repuesto del maletero
+# Sacar la rueda de repuesto del maletero
 sacar = probpl.AcciónPlanificación(
     nombre='sacar_repuesto',
     precondicionesP=en('rueda-repuesto', 'maletero'),
@@ -51,11 +53,16 @@ problema_rueda_pinchada = probpl.ProblemaPlanificación(
 )
 
 
-new.predicados = [en]
-new.problema=problema_rueda_pinchada
+auxiliares.predicados = [en]
 
+Prego.problema=problema_rueda_pinchada
 
-result = new.prego(estado_inicial_rueda, en('rueda-pinchada', 'maletero')) + new.prego(estado_inicial_rueda, en('rueda-repuesto', 'eje'))
+result = Prego.prego(estado_inicial_rueda, en('rueda-repuesto', 'eje')) + Prego.prego(estado_inicial_rueda, en('rueda-pinchada', 'maletero'))
 
-for i in result:
-    print(i)
+print('-------------------------Result-------------------------')
+[print(x.nombre) for x in result]
+
+Heuristicas.problema=problema_rueda_pinchada
+
+heur=Heuristicas.heuristica(estado_inicial_rueda,en('rueda-repuesto', 'eje')) + Heuristicas.heuristica(estado_inicial_rueda, en('rueda-pinchada', 'maletero'))
+print('Heuristica: ', heur)

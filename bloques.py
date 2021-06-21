@@ -1,7 +1,8 @@
 import PlanificacionAutomatica.problema_planificación_pddl as probpl
 import PlanificacionAutomatica.búsqueda_espacio_estados as búsqee
 import Heuristicas
-import new
+import Prego
+import auxiliares
 
 
 
@@ -12,7 +13,8 @@ sobrelamesa = probpl.Predicado(bloques)
 sobre = probpl.Predicado(bloques, bloques)
 agarrado = probpl.Predicado(bloques)
 
-new.predicados = [despejado, brazolibre, sobrelamesa, sobre, agarrado]
+auxiliares.predicados = [despejado, brazolibre, sobrelamesa, sobre, agarrado]
+
 
 estado_inicial_bloques = probpl.Estado(
     sobrelamesa('A'), despejado('A'),
@@ -82,9 +84,9 @@ bajar = probpl.EsquemaPlanificación(
 )
 
 problema_mundo_bloques = probpl.ProblemaPlanificación(
-    operadores=[apilar,
+    operadores=[agarrar,
+                apilar,
                 desapilar,
-                agarrar,
                 bajar],
     estado_inicial=estado_inicial_bloques,
     objetivosP=[sobrelamesa('C'),
@@ -101,13 +103,19 @@ problema_mundo_bloques = probpl.ProblemaPlanificación(
 
 
 
-new.problema=problema_mundo_bloques
-predicado = sobrelamesa('C')
-new.ultimo_estado = probpl.Estado(
+Prego.problema=problema_mundo_bloques
+predicado = sobre('A', 'B')
+Prego.ultimo_estado = probpl.Estado(
     predicado
 )
-result=new.prego(estado_inicial_bloques, predicado)
+result=Prego.prego(estado_inicial_bloques, predicado)
 for i in result:
     print(i)
+
+# Heuristicas.problema=problema_mundo_bloques
+# predicado = sobre('A', 'B')
+# heur=Heuristicas.heuristica(estado_inicial_bloques, predicado)
+# print(heur)
     
+
 

@@ -1,52 +1,24 @@
 from re import X
 import PlanificacionAutomatica.problema_espacio_estados as probee
 import PlanificacionAutomatica.problema_planificación_pddl as probpl
+import auxiliares
 
-# def Heuristica(e, p):
-#     if()
+
 problema= None
-predicados = []
 
-
-def prego(e, p):
-    print('Estado incial: \n', e)
-    print('Objetivo: \n', p)
-    
+def heuristica(e, p):
+    posiblesAcciones=auxiliares.incluyeEfectos(p, problema.acciones)
     if e.satisface_positivas(p):
-        print('-----------------------------------')
-        return []
+        return 0
+    elif len(posiblesAcciones)==0:
+        return 9999999999999
     else:
-        posibleAccion=[]
-        for accion in problema.acciones:
-            for clave in p:
-                if clave in accion.efectosP.keys() and p[clave]==accion.efectosP[clave]: 
-                        # print("Acciones: ", accion.nombre, accion.efectosP[clave])
-                        # print('Objetivo: ', p)
-                        posibleAccion.append(accion)
-        if len(posibleAccion)==0:
-            print('Aqui tambien ha entrado')
-            return problema.acciones
-        else:
-            options=[]
-            for accion in posibleAccion:
-                print(accion.nombre)
-                results=[accion]
-                for pre in accion.precondicionesP:  
-                    for i in predicados:
-                        if(i.name==pre):
-                            letras = []
-                            for x in accion.precondicionesP[pre]:
-                                for j in x:
-                                    letras.append(j)
-                            print(*letras) 
-                            results += prego(e, i(*letras))
-                options.append(results)
-
-            minValue=None
-            minIndex=None
-            for o in options:
-                if(minValue is None or len(o)<minValue):
-                    minValue=len(o)
-                    minIndex=options.index(o)
-
-            return options[minIndex]
+        result= None
+        for accion in posiblesAcciones:
+            option=1
+            for q in accion.precondicionesP:
+                pred=auxiliares.get_predicado(q, accion.precondicionesP[q])
+                option+=heuristica(e, pred)
+            if result==None or option<result:
+                result=option
+        return result
