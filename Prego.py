@@ -45,3 +45,61 @@ def prego(e, p):
             print(minValue, len(o), minIndex)
 
         return options[minIndex]
+
+
+
+
+
+
+def nuevoIntento(e, p):
+    accionesPosibles = auxiliares.incluyeEfectos(p, problema.acciones)
+    if e.satisface_positivas(p):
+        return []
+    elif len(accionesPosibles)==0:
+        return problema.acciones
+    else:
+        opciones = []
+        for accion in accionesPosibles:
+            
+            result =[accion]
+            for pred in accion.precondicionesP:
+                
+                newP = auxiliares.get_predicado(pred, accion.precondicionesP[pred])
+                result += nuevoIntento(e,newP)
+                
+            opciones.append(result)
+            break
+    
+        minValue = None
+        opcion = None
+        for o in opciones:
+            if minValue is None or len(o)<minValue:
+                minValue = len(o)
+                opcion = o
+        return opcion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

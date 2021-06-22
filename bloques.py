@@ -108,7 +108,7 @@ Prego.problema=problema_mundo_bloques
 objetivosP=[sobre('C','B'), sobre('B','A'), brazolibre(), sobrelamesa('A')]
 result = []
 for objetivo in objetivosP:
-    result += Prego.prego(estado_inicial_bloques, objetivo)
+    result += Prego.nuevoIntento(estado_inicial_bloques, objetivo)
 
 
 print('-------------------------Result-------------------------')
