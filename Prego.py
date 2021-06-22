@@ -30,8 +30,9 @@ def prego(e, p):
                 # print(accion.precondicionesP[predicado])
                 pred = auxiliares.get_predicado(predicado, accion.precondicionesP[predicado])
                 results += prego(e, pred)
-                options.append(results)
                 break
+                
+            options.append(results)
                                 
         minValue=None
         minIndex=None
@@ -41,5 +42,6 @@ def prego(e, p):
             if(minValue is None or len(o)<minValue):
                 minValue=len(o)
                 minIndex=options.index(o)
+            print(minValue, len(o), minIndex)
 
         return options[minIndex]
