@@ -62,7 +62,7 @@ result = Prego.prego(estado_inicial_rueda, en('rueda-repuesto', 'eje')) + Prego.
 print('-------------------------Result-------------------------')
 [print(x.nombre) for x in result]
 
-Heuristicas.problema=problema_rueda_pinchada
+# Heuristicas.problema=problema_rueda_pinchada
 
-heur=Heuristicas.heuristica(estado_inicial_rueda,en('rueda-repuesto', 'eje')) + Heuristicas.heuristica(estado_inicial_rueda, en('rueda-pinchada', 'maletero'))
-print('Heuristica: ', heur)
+# heur=Heuristicas.heuristica(estado_inicial_rueda,en('rueda-repuesto', 'eje')) + Heuristicas.heuristica(estado_inicial_rueda, en('rueda-pinchada', 'maletero'))
+# print('Heuristica: ', heur)

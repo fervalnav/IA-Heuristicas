@@ -17,10 +17,8 @@ auxiliares.predicados = [despejado, brazolibre, sobrelamesa, sobre, agarrado]
 
 
 estado_inicial_bloques = probpl.Estado(
-    sobrelamesa('A'), despejado('A'),
-    sobrelamesa('B'),
-    sobre('C','B'), despejado('C'),
-    brazolibre()
+    sobrelamesa('A'), despejado('B'),
+    sobre('B','C'), sobre('C','A'), brazolibre()
 )
 
 coste_bloque = probpl.CosteEsquema(lambda b: {'A': 1, 'B': 2, 'C': 3}[b])
@@ -104,13 +102,15 @@ problema_mundo_bloques = probpl.ProblemaPlanificación(
 
 
 Prego.problema=problema_mundo_bloques
-predicado = sobre('A', 'B')
-Prego.ultimo_estado = probpl.Estado(
-    predicado
-)
-result=Prego.prego(estado_inicial_bloques, predicado)
-for i in result:
-    print(i)
+
+objetivosP=[despejado('A')]
+result = []
+for objetivo in objetivosP:
+    result += Prego.prego(estado_inicial_bloques, objetivo)
+
+
+print('-------------------------Result-------------------------')
+[print(x.nombre) for x in result]
 
 # Heuristicas.problema=problema_mundo_bloques
 # predicado = sobre('A', 'B')
