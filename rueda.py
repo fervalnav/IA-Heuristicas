@@ -60,7 +60,7 @@ Prego.problema=problema_rueda_pinchada
 result = Prego.prego(estado_inicial_rueda, en('rueda-repuesto', 'eje')) + Prego.prego(estado_inicial_rueda, en('rueda-pinchada', 'maletero'))
 
 print('-------------------------Result-------------------------')
-[print(x.nombre) for x in result]
+[print(x.nombre) for x in reversed(result)]
 
 # Heuristicas.problema=problema_rueda_pinchada
 

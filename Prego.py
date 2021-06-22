@@ -66,9 +66,9 @@ def nuevoIntento(e, p):
                 
                 newP = auxiliares.get_predicado(pred, accion.precondicionesP[pred])
                 result += nuevoIntento(e,newP)
-                
+                break
             opciones.append(result)
-            break
+            
     
         minValue = None
         opcion = None

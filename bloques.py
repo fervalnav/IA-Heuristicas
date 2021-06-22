@@ -105,10 +105,12 @@ problema_mundo_bloques = probpl.ProblemaPlanificación(
 
 Prego.problema=problema_mundo_bloques
 
-objetivosP=[sobre('C','B'), sobre('B','A'), brazolibre(), sobrelamesa('A')]
+objetivosP=[sobrelamesa('C'),
+                agarrado('B'),
+                sobrelamesa('A')]
 result = []
 for objetivo in objetivosP:
-    result += Prego.nuevoIntento(estado_inicial_bloques, objetivo)
+    result += reversed(Prego.nuevoIntento(estado_inicial_bloques, objetivo))
 
 
 print('-------------------------Result-------------------------')
