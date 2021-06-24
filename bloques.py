@@ -105,16 +105,15 @@ problema_mundo_bloques = probpl.ProblemaPlanificación(
 
 Prego.problema=problema_mundo_bloques
 
-objetivosP=[sobrelamesa('C'),
-                agarrado('B'),
-                sobrelamesa('A')]
+objetivosP=[sobre('A','B'), sobre('B','C'), sobrelamesa('C')]
 result = []
+
 for objetivo in objetivosP:
-    result += reversed(Prego.nuevoIntento(estado_inicial_bloques, objetivo))
+    result += Prego.nuevoIntento(estado_inicial_bloques, objetivo)
 
 
 print('-------------------------Result-------------------------')
-[print(x.nombre) for x in result]
+[print(x.nombre) for x in reversed(result)]
 
 # Heuristicas.problema=problema_mundo_bloques
 # predicado = sobre('A', 'B')
