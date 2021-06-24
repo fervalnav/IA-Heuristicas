@@ -119,11 +119,11 @@ bucear = probpl.EsquemaPlanificación(
 fotografiar = probpl.EsquemaPlanificación(
     nombre = 'fotografiar({b}, {c}, {t1}, {t2})',
     precondicionesP = [posicion_buceador('{b}', '{c}'),
-                     tanques_llenos('{b}', '{t1}'),
-                     tanques_llenos('{c}', '{t2}')],
+                     tanques_llenos('{b}', '{t1}')],
     efectosN = [tanques_llenos('{b}', '{t1}')],
     efectosP = [tanques_llenos('{b}', '{t2}'),
-               con_foto_de('{c}')],
+               con_foto_de('{c}'),
+               tanques_llenos('{c}', '{t2}')],
     dominio = [(b, c, str(t1), str(2), str(t1 -1)) for b in buceadores
               for c in cuevas
               for t1 in range(1, 5)]
@@ -185,20 +185,27 @@ problema_buceadores = probpl.ProblemaPlanificación(
     estado_inicial = estado_inicial_buceadores,
     objetivosP = [posicion_buceador('B0', 'superficie'),
                  posicion_buceador('B1', 'superficie'),
-                 con_foto_de('C4')])
-
-Prego.problema=problema_buceadores
-
-objetivosP = [posicion_buceador('B0', 'superficie'),
-            posicion_buceador('B1', 'superficie'),
-            con_foto_de('C4')]
-result = []
-for objetivo in objetivosP:
-    result += Prego.prego(estado_inicial_buceadores, objetivo)
+                 con_foto_de('C3')])
 
 
-print('-------------------------Result-------------------------')
-[print(x.nombre) for x in result]
+print(f'Estado inicial:\n{estado_inicial_buceadores}')
+print(f'Objetivos positivos: {problema_buceadores.objetivosP}')
+print(f'Objetivos negativos: {problema_buceadores.objetivosN}')
+busqueda_profundidad = búsqee.BúsquedaEnProfundidadAcotada(cota=15)
+print('Busqueda en profundidad: ', busqueda_profundidad.buscar(problema_buceadores))
+
+# Prego.problema=problema_buceadores
+
+# objetivosP = [posicion_buceador('B0', 'superficie'),
+#             posicion_buceador('B1', 'superficie'),
+#             con_foto_de('C4')]
+# result = []
+# for objetivo in objetivosP:
+#     result += Prego.prego(estado_inicial_buceadores, objetivo)
+
+
+# print('-------------------------Result-------------------------')
+# [print(x.nombre) for x in result]
 
 # Heuristicas.problema=problema_buceadores
 # result =0
