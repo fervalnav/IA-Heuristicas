@@ -52,12 +52,18 @@ problema_rueda_pinchada = probpl.ProblemaPlanificación(
                 en('rueda-repuesto', 'eje')]
 )
 
+print(f'Estado inicial:\n{estado_inicial_rueda}')
+print(f'Objetivos positivos: {problema_rueda_pinchada.objetivosP}')
+print(f'Objetivos negativos: {problema_rueda_pinchada.objetivosN}')
+busqueda_profundidad = búsqee.BúsquedaEnProfundidad()
+print('Busqueda en profundidad: ', busqueda_profundidad.buscar(problema_rueda_pinchada))
+
 
 auxiliares.predicados = [en]
 
 Prego.problema=problema_rueda_pinchada
 
-result = Prego.prego(estado_inicial_rueda, en('rueda-repuesto', 'eje')) + Prego.prego(estado_inicial_rueda, en('rueda-pinchada', 'maletero'))
+result = Prego.nuevoIntento(estado_inicial_rueda, en('rueda-repuesto', 'eje')) + Prego.nuevoIntento(estado_inicial_rueda, en('rueda-pinchada', 'maletero'))
 
 print('-------------------------Result-------------------------')
 [print(x.nombre) for x in reversed(result)]

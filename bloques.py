@@ -95,25 +95,26 @@ problema_mundo_bloques = probpl.ProblemaPlanificación(
 )
 
 
-# print(f'Estado inicial:\n{estado_inicial_bloques}')
-# print(f'Objetivos positivos: {problema_mundo_bloques.objetivosP}')
-# print(f'Objetivos negativos: {problema_mundo_bloques.objetivosN}')
-# búsqee.BúsquedaEnProfundidad.buscar(problema_mundo_bloques)
+print(f'Estado inicial:\n{estado_inicial_bloques}')
+print(f'Objetivos positivos: {problema_mundo_bloques.objetivosP}')
+print(f'Objetivos negativos: {problema_mundo_bloques.objetivosN}')
+busqueda_profundidad = búsqee.BúsquedaEnProfundidad()
+print('Busqueda en profundidad: ', busqueda_profundidad.buscar(problema_mundo_bloques))
 
 
 
 
-Prego.problema=problema_mundo_bloques
+# Prego.problema=problema_mundo_bloques
 
-objetivosP=[sobre('A','B'), sobre('B','C'), sobrelamesa('C')]
-result = []
+# objetivosP=[sobre('A','B'), sobre('B','C'), sobrelamesa('C')]
+# result = []
 
-for objetivo in objetivosP:
-    result += Prego.nuevoIntento(estado_inicial_bloques, objetivo)
+# for objetivo in objetivosP:
+#     result += Prego.nuevoIntento(estado_inicial_bloques, objetivo)
 
 
-print('-------------------------Result-------------------------')
-[print(x.nombre) for x in reversed(result)]
+# print('-------------------------Result-------------------------')
+# [print(x.nombre) for x in reversed(result)]
 
 # Heuristicas.problema=problema_mundo_bloques
 # predicado = sobre('A', 'B')

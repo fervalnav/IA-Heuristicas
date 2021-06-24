@@ -68,7 +68,6 @@ def nuevoIntento(e, p):
         minValue = None
         opcion = None
         
-        [print(len(o)) for o in opciones]
         for o in opciones:
             if minValue is None or len(o)<minValue:
                 minValue = len(o)
