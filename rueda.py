@@ -1,3 +1,4 @@
+from busquedas import busqueda_en_profundidad_H
 import PlanificacionAutomatica.problema_planificación_pddl as probpl
 import PlanificacionAutomatica.búsqueda_espacio_estados as búsqee
 import Prego
@@ -52,22 +53,26 @@ problema_rueda_pinchada = probpl.ProblemaPlanificación(
                 en('rueda-repuesto', 'eje')]
 )
 
-print(f'Estado inicial:\n{estado_inicial_rueda}')
-print(f'Objetivos positivos: {problema_rueda_pinchada.objetivosP}')
-print(f'Objetivos negativos: {problema_rueda_pinchada.objetivosN}')
-busqueda_profundidad = búsqee.BúsquedaEnProfundidad()
-print('Busqueda en profundidad: ', busqueda_profundidad.buscar(problema_rueda_pinchada))
+# print(f'Estado inicial:\n{estado_inicial_rueda}')
+# print(f'Objetivos positivos: {problema_rueda_pinchada.objetivosP}')
+# print(f'Objetivos negativos: {problema_rueda_pinchada.objetivosN}')
+# busqueda_profundidad = búsqee.BúsquedaEnProfundidad()
+# print('Busqueda en profundidad: ', busqueda_profundidad.buscar(problema_rueda_pinchada))
 
 
 auxiliares.predicados = [en]
 
 Prego.problema=problema_rueda_pinchada
 
-result = Prego.nuevoIntento(estado_inicial_rueda, en('rueda-repuesto', 'eje')) + Prego.nuevoIntento(estado_inicial_rueda, en('rueda-pinchada', 'maletero'))
+# result = Prego.nuevoIntento(estado_inicial_rueda, en('rueda-repuesto', 'eje')) + Prego.nuevoIntento(estado_inicial_rueda, en('rueda-pinchada', 'maletero'))
 
-print('-------------------------Result-------------------------')
-[print(x.nombre) for x in reversed(result)]
+# print('-------------------------Result-------------------------')
+# # [print(x.nombre) for x in reversed(result)]
+# print(result)
 
+objetivosP = [en('rueda-repuesto', 'eje'),en('rueda-pinchada', 'maletero')]
+resultado = busqueda_en_profundidad_H(estado_inicial_rueda, objetivosP, problema_rueda_pinchada.acciones)
+[print(x.nombre) for x in resultado]
 # Heuristicas.problema=problema_rueda_pinchada
 
 # heur=Heuristicas.heuristica(estado_inicial_rueda,en('rueda-repuesto', 'eje')) + Heuristicas.heuristica(estado_inicial_rueda, en('rueda-pinchada', 'maletero'))

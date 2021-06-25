@@ -11,10 +11,14 @@ def get_predicado(name, listaArg):
                 [lista.append(letra) for letra in listaArg]
                 return predicado(*lista[0])
 
-def incluyeEfectos(p, acciones):
+def incluyeEfectos(p, acciones, usadas=[]):
     lista = []
     for accion in acciones:
         for clave in p:
             if clave in accion.efectosP.keys() and p[clave]==accion.efectosP[clave]:
                 lista.append(accion)
+
+    for uso in usadas:
+        if uso in lista:
+            lista.remove(uso)
     return lista

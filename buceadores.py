@@ -94,6 +94,12 @@ contratar_B1 = probpl.AcciónPlanificación(
     efectosP = trabajando('B1'),
     coste = 67
 )
+contratar = probpl.EsquemaPlanificación(
+    nombre = 'contratar({b})',
+    precondicionesP = disponible('{b}'),
+    efectosN = disponible('{b}'),
+    efectosP = trabajando('{b}'),
+    variables = {'b': buceadores})
 
 entrar_al_agua = probpl.EsquemaPlanificación(
     nombre = 'entrar_al_agua({b})',
@@ -122,9 +128,8 @@ fotografiar = probpl.EsquemaPlanificación(
                      tanques_llenos('{b}', '{t1}')],
     efectosN = [tanques_llenos('{b}', '{t1}')],
     efectosP = [tanques_llenos('{b}', '{t2}'),
-               con_foto_de('{c}'),
-               tanques_llenos('{c}', '{t2}')],
-    dominio = [(b, c, str(t1), str(2), str(t1 -1)) for b in buceadores
+               con_foto_de('{c}')],
+    dominio = [(b, c, str(t1), str(t1 -1)) for b in buceadores
               for c in cuevas
               for t1 in range(1, 5)]
 )
@@ -136,8 +141,8 @@ soltar_tanque = probpl.EsquemaPlanificación(
     efectosN = [tanques_llenos('{b}', '{t1}'),
                tanques_llenos('{c}', '{t2}')],
     efectosP = [tanques_llenos('{b}', '{t3}'),
-               tanques_llenos('{b}', '{t4}')],
-    dominio = [(b, c, str(t1), str(2), str(t1 -1), str(t2 + 1)) for b in buceadores
+               tanques_llenos('{c}', '{t4}')],
+    dominio = [(b, c, str(t1), str(t2), str(t1 -1), str(t2 + 1)) for b in buceadores
               for c in cuevas
               for t1 in range(1, 5)
               for t2 in range(8)]
@@ -179,33 +184,34 @@ estado_inicial_buceadores = probpl.Estado(
     disponible('B1'))
 
 problema_buceadores = probpl.ProblemaPlanificación(
-    operadores = [contratar_B0, contratar_B1,
+    operadores = [contratar,
                  entrar_al_agua, bucear, fotografiar,
                  cargar_tanque, soltar_tanque, salir_del_agua],
     estado_inicial = estado_inicial_buceadores,
     objetivosP = [posicion_buceador('B0', 'superficie'),
                  posicion_buceador('B1', 'superficie'),
-                 con_foto_de('C3')])
+                 con_foto_de('C4')])
 
 
-print(f'Estado inicial:\n{estado_inicial_buceadores}')
-print(f'Objetivos positivos: {problema_buceadores.objetivosP}')
-print(f'Objetivos negativos: {problema_buceadores.objetivosN}')
-busqueda_profundidad = búsqee.BúsquedaEnProfundidadAcotada(cota=15)
-print('Busqueda en profundidad: ', busqueda_profundidad.buscar(problema_buceadores))
+# print(f'Estado inicial:\n{estado_inicial_buceadores}')
+# print(f'Objetivos positivos: {problema_buceadores.objetivosP}')
+# print(f'Objetivos negativos: {problema_buceadores.objetivosN}')
+# busqueda_profundidad = búsqee.BúsquedaEnProfundidadAcotada(cota=15)
+# print('Busqueda en profundidad: ', busqueda_profundidad.buscar(problema_buceadores))
 
-# Prego.problema=problema_buceadores
+Prego.problema=problema_buceadores
 
-# objetivosP = [posicion_buceador('B0', 'superficie'),
-#             posicion_buceador('B1', 'superficie'),
-#             con_foto_de('C4')]
-# result = []
-# for objetivo in objetivosP:
-#     result += Prego.prego(estado_inicial_buceadores, objetivo)
+objetivosP = [posicion_buceador('B0', 'superficie'),
+            posicion_buceador('B1', 'superficie'),
+            con_foto_de('C4')]
+result = 0
+for objetivo in objetivosP:
+    result += Prego.nuevoIntento(estado_inicial_buceadores, objetivo)
 
 
-# print('-------------------------Result-------------------------')
+print('-------------------------Result-------------------------')
 # [print(x.nombre) for x in result]
+print(result)
 
 # Heuristicas.problema=problema_buceadores
 # result =0

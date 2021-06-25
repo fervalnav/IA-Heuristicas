@@ -1,3 +1,4 @@
+from busquedas import busqueda_en_profundidad_H
 import PlanificacionAutomatica.problema_planificación_pddl as probpl
 import PlanificacionAutomatica.búsqueda_espacio_estados as búsqee
 import Heuristicas
@@ -85,37 +86,43 @@ bajar = probpl.EsquemaPlanificación(
 
 problema_mundo_bloques = probpl.ProblemaPlanificación(
     operadores=[agarrar,
+                bajar,
                 apilar,
-                desapilar,
-                bajar],
+                desapilar
+                ],
     estado_inicial=estado_inicial_bloques,
-    objetivosP=[sobrelamesa('C'),
-                sobre('B', 'C'),
-                sobre('A', 'B')]
+    objetivosP=[sobrelamesa('A'),
+                sobre('C', 'B'),
+                sobre('B', 'A')]
 )
 
 
-print(f'Estado inicial:\n{estado_inicial_bloques}')
-print(f'Objetivos positivos: {problema_mundo_bloques.objetivosP}')
-print(f'Objetivos negativos: {problema_mundo_bloques.objetivosN}')
-busqueda_profundidad = búsqee.BúsquedaEnProfundidad()
-print('Busqueda en profundidad: ', busqueda_profundidad.buscar(problema_mundo_bloques))
+# print(f'Estado inicial:\n{estado_inicial_bloques}')
+# print(f'Objetivos positivos: {problema_mundo_bloques.objetivosP}')
+# print(f'Objetivos negativos: {problema_mundo_bloques.objetivosN}')
+# busqueda_profundidad = búsqee.BúsquedaEnProfundidad()
+# print('Busqueda en profundidad: ', busqueda_profundidad.buscar(problema_mundo_bloques))
 
 
 
 
-# Prego.problema=problema_mundo_bloques
 
-# objetivosP=[sobre('A','B'), sobre('B','C'), sobrelamesa('C')]
+
+Prego.problema=problema_mundo_bloques
+
+objetivosP=[sobre('B', 'A'), sobrelamesa('A'),
+                sobre('C', 'B')]
 # result = []
 
 # for objetivo in objetivosP:
-#     result += Prego.nuevoIntento(estado_inicial_bloques, objetivo)
-
-
+#     result +=  Prego.nuevoIntento(estado_inicial_bloques, objetivo)
 # print('-------------------------Result-------------------------')
-# [print(x.nombre) for x in reversed(result)]
+# [print(x.nombre) for x in result]
+# print(result)
 
+resultado = busqueda_en_profundidad_H(estado_inicial_bloques, objetivosP, problema_mundo_bloques.acciones)
+print('-----Result-------')
+[print(x.nombre) for x in resultado]
 # Heuristicas.problema=problema_mundo_bloques
 # predicado = sobre('A', 'B')
 # heur=Heuristicas.heuristica(estado_inicial_bloques, predicado)

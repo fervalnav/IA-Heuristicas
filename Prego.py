@@ -3,10 +3,10 @@ import PlanificacionAutomatica.problema_espacio_estados as probee
 import PlanificacionAutomatica.problema_planificación_pddl as probpl
 import auxiliares
 problema= None
-accionesUsadas  =[]
 
 def generar_estado(predicado):
     return probpl.Estado(predicado)
+
 
 
 def prego(e, p):
@@ -46,23 +46,29 @@ def prego(e, p):
 
         return options[minIndex]
 
+def nuevoIntento(e,p):
+    accionesUsadas = []
+    return len(nuevoIntentoRec(e, p, accionesUsadas))
 
-def nuevoIntento(e, p):
-    accionesPosibles = auxiliares.incluyeEfectos(p, problema.acciones)
+def nuevoIntentoRec(e, p, accionesUsadas):
+    accionesPosibles = auxiliares.incluyeEfectos(p, problema.acciones, accionesUsadas)
     if e.satisface_positivas(p):
         return []
     elif len(accionesPosibles)==0:
         return problema.acciones
     else:
         opciones = []
+        # try:
         for accion in accionesPosibles:
             
             result =[accion]
-            
+            accionesUsadas.append(accion)
             for pred in accion.precondicionesP:  
                 newP = auxiliares.get_predicado(pred, accion.precondicionesP[pred])
-                result += nuevoIntento(e,newP)
+                result += nuevoIntentoRec(e,newP, accionesUsadas)
             opciones.append(result)
+        # except:
+        #     opciones.append(accionesPosibles)
             
     
         minValue = None
