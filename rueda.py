@@ -1,9 +1,9 @@
 from busquedas import busqueda_en_profundidad_H
 import PlanificacionAutomatica.problema_planificación_pddl as probpl
 import PlanificacionAutomatica.búsqueda_espacio_estados as búsqee
-import Prego
 import Heuristicas
 import auxiliares
+import app
 
 ruedas = {'rueda-pinchada', 'rueda-repuesto'}
 localizaciones = {'eje', 'maletero', 'suelo'}
@@ -49,8 +49,7 @@ guardar = probpl.AcciónPlanificación(
 problema_rueda_pinchada = probpl.ProblemaPlanificación(
     operadores=[quitar, guardar, sacar, poner],
     estado_inicial=estado_inicial_rueda,
-    objetivosP=[en('rueda-pinchada', 'maletero'),
-                en('rueda-repuesto', 'eje')]
+    objetivosP = [en('rueda-repuesto', 'maletero'),en('rueda-pinchada', 'eje')]
 )
 
 # print(f'Estado inicial:\n{estado_inicial_rueda}')
@@ -62,7 +61,6 @@ problema_rueda_pinchada = probpl.ProblemaPlanificación(
 
 auxiliares.predicados = [en]
 
-Prego.problema=problema_rueda_pinchada
 
 # result = Prego.nuevoIntento(estado_inicial_rueda, en('rueda-repuesto', 'eje')) + Prego.nuevoIntento(estado_inicial_rueda, en('rueda-pinchada', 'maletero'))
 
@@ -70,13 +68,16 @@ Prego.problema=problema_rueda_pinchada
 # # [print(x.nombre) for x in reversed(result)]
 # print(result)
 
-objetivosP = [en('rueda-repuesto', 'eje'),en('rueda-pinchada', 'maletero')]
-resultado = busqueda_en_profundidad_H(estado_inicial_rueda, objetivosP, problema_rueda_pinchada.acciones)
-print('-----Result-----')
-[print(x.nombre) for x in resultado]
+objetivosP = [en('rueda-repuesto', 'maletero'),en('rueda-pinchada', 'eje')]
+# resultado = busqueda_en_profundidad_H(estado_inicial_rueda, objetivosP, problema_rueda_pinchada.acciones)
+# print('-----Result-----')
+# [print(x.nombre) for x in resultado]
 
 
 # Heuristicas.problema=problema_rueda_pinchada
 
 # heur=Heuristicas.heuristica(estado_inicial_rueda,en('rueda-repuesto', 'eje')) + Heuristicas.heuristica(estado_inicial_rueda, en('rueda-pinchada', 'maletero'))
 # print('Heuristica: ', heur)
+
+# app.busqueda(problema_rueda_pinchada, objetivosP)
+app.heuristica(problema_rueda_pinchada, objetivosP)

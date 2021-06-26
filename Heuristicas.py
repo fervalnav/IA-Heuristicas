@@ -20,7 +20,7 @@ def delta0_rec(e, p, accionesUsadas):
             accionesUsadas.append(accion)
             for q in accion.precondicionesP:
                 pred=auxiliares.get_predicado(q, accion.precondicionesP[q])
-                option+=delta0_rec(e, pred)
+                option+=delta0_rec(e, pred, accionesUsadas)
             if result==None or option<result:
                 result=option
         return result

@@ -3,6 +3,7 @@ import PlanificacionAutomatica.problema_planificación_pddl as probpl
 import PlanificacionAutomatica.búsqueda_espacio_estados as búsqee
 import auxiliares
 import Heuristicas
+import app
 
 
 bloques = {'A', 'B', 'C'}
@@ -13,7 +14,6 @@ sobre = probpl.Predicado(bloques, bloques)
 agarrado = probpl.Predicado(bloques)
 
 auxiliares.predicados = [despejado, brazolibre, sobrelamesa, sobre, agarrado]
-
 
 estado_inicial_bloques = probpl.Estado(
     sobrelamesa('A'), despejado('A'),
@@ -127,15 +127,25 @@ problema_mundo_bloques3 = probpl.ProblemaPlanificación(
 
 
 
-Heuristicas.problema=problema_mundo_bloques
 objetivos = []
 # for k, vSet in problema_mundo_bloques.objetivosP:
 #         for v in vSet:
 #             objetivos.append()
-objetivos1=[sobrelamesa('C'),
+objetivos1=[sobrelamesa('A'), despejado('A'),
+    sobrelamesa('B'),
+    sobre('C','B'), despejado('C'),
+    brazolibre()]
+
+objetivos2=[sobrelamesa('C'),
                 sobre('B', 'C'),
                 sobre('A', 'B')]
-result = 0
+
+objetivos3=[sobrelamesa('A'), despejado('A'),
+    sobrelamesa('B'), despejado('B'),
+    agarrado('C')]
+
+
+# result = 0
 
 # for objetivo in objetivos1:
 #     result +=  Prego.prego(estado_inicial_bloques, objetivo)
@@ -143,13 +153,14 @@ result = 0
 # # [print(x.nombre) for x in result]
 # print(result)
 
-resultado = busquedas.busqueda_en_profundidad_H(estado_inicial_bloques, objetivos1, problema_mundo_bloques.acciones)
-print('-----Result-------')
-[print(x.nombre) for x in resultado]
+# resultado = busquedas.busqueda_en_profundidad_H(estado_inicial_bloques, objetivos1, problema_mundo_bloques.acciones)
+# print('-----Result-------')
+# [print(x.nombre) for x in resultado]
 # Heuristicas.problema=problema_mundo_bloques
 # predicado = sobre('A', 'B')
 # heur=Heuristicas.heuristica(estado_inicial_bloques, predicado)
 # print(heur)
+
     
 
-
+app.busqueda(problema_mundo_bloques, objetivos1)

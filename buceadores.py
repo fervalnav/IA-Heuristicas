@@ -1,8 +1,8 @@
 from busquedas import busqueda_en_profundidad_H
 import PlanificacionAutomatica.problema_planificación_pddl as probpl
 import PlanificacionAutomatica.búsqueda_espacio_estados as búsqee
-import Heuristicas
 import auxiliares
+import app
 
 cuevas = {f'C{i}' for i in range(5)}
 buceadores = {f'B{i}' for i in range(2)}
@@ -40,6 +40,32 @@ contratar_B1 = probpl.AcciónPlanificación(
     precondicionesN = trabajando('B0'),
     efectosN = disponible('B1'),
     efectosP = trabajando('B1'),
+    coste = 67
+)
+
+contratar_B2 = probpl.AcciónPlanificación(
+    nombre = 'contratar(B0)',
+    precondicionesP = disponible('B0'),
+    precondicionesN = trabajando('B1'),
+    efectosN = disponible('B2'),
+    efectosP = trabajando('B2'),
+    coste = 10
+)
+contratar_B3 = probpl.AcciónPlanificación(
+    nombre = 'contratar(B1)',
+    precondicionesP = disponible('B1'),
+    precondicionesN = trabajando('B0'),
+    efectosN = disponible('B3'),
+    efectosP = trabajando('B3'),
+    coste = 67
+)
+
+contratar_B4 = probpl.AcciónPlanificación(
+    nombre = 'contratar(B1)',
+    precondicionesP = disponible('B1'),
+    precondicionesN = trabajando('B0'),
+    efectosN = disponible('B4'),
+    efectosP = trabajando('B4'),
     coste = 67
 )
 contratar = probpl.EsquemaPlanificación(
@@ -123,11 +149,11 @@ salir_del_agua = probpl.EsquemaPlanificación(
 estado_inicial_buceadores = probpl.Estado(
     posicion_buceador('B0', 'superficie'),
     posicion_buceador('B1', 'superficie'),
-    tanques_llenos('C0', '0'),
-    tanques_llenos('C1', '0'),
-    tanques_llenos('C2', '0'),
-    tanques_llenos('C3', '0'),
-    tanques_llenos('C4', '0'),
+    tanques_llenos('C0', '4'),
+    tanques_llenos('C1', '4'),
+    tanques_llenos('C2', '2'),
+    tanques_llenos('C3', '2'),
+    tanques_llenos('C4', '2'),
     disponible('B0'),
     disponible('B1'))
 
@@ -138,7 +164,7 @@ problema_buceadores = probpl.ProblemaPlanificación(
     estado_inicial = estado_inicial_buceadores,
     objetivosP = [posicion_buceador('B0', 'superficie'),
                  posicion_buceador('B1', 'superficie'),
-                 con_foto_de('C4')])
+                 con_foto_de('C1')])
 
 
 # print(f'Estado inicial:\n{estado_inicial_buceadores}')
@@ -147,25 +173,10 @@ problema_buceadores = probpl.ProblemaPlanificación(
 # busqueda_profundidad = búsqee.BúsquedaEnProfundidadAcotada(cota=15)
 # print('Busqueda en profundidad: ', busqueda_profundidad.buscar(problema_buceadores))
 
-Prego.problema=problema_buceadores
 
 objetivosP = [posicion_buceador('B0', 'superficie'),
             posicion_buceador('B1', 'superficie'),
             con_foto_de('C1')]
-# result = 0
-# for objetivo in objetivosP:
-#     result += Prego.nuevoIntento(estado_inicial_buceadores, objetivo)
 
 
-# print('-------------------------Result-------------------------')
-# # [print(x.nombre) for x in result]
-# print(result)
-
-resultado = busqueda_en_profundidad_H(estado_inicial_buceadores, objetivosP, problema_buceadores.acciones)
-print('-----Result-------')
-[print(x.nombre) for x in resultado]
-# Heuristicas.problema=problema_buceadores
-# result =0
-# for objetivo in objetivosP:
-#     result += Heuristicas.heuristica(estado_inicial_buceadores, objetivo)
-# print(result)
+app.busqueda(problema_buceadores, objetivosP)

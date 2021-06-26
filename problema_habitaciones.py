@@ -1,9 +1,8 @@
 from busquedas import busqueda_en_profundidad_H
 import PlanificacionAutomatica.problema_planificación_pddl as probpl
 import PlanificacionAutomatica.búsqueda_espacio_estados as búsqee
-import Prego
-import Heuristicas
 import auxiliares
+import app
 
 cajas = {'C1', 'C2'}
 habitaciones = {'H1', 'H2', 'H3'}
@@ -15,6 +14,14 @@ roboten = probpl.Predicado(habitaciones)
 conecta = probpl.Predicado(puertas, habitaciones, habitaciones)
 
 estado_inicial_habitaciones = probpl.Estado(abierta('P1'),
+                                            en('C1', 'H1'),
+                                            roboten('H1'),
+                                            conecta('P1','H1','H2'),
+                                            conecta('P2','H2','H3'),
+                                            conecta('P1','H2','H1'),
+                                            conecta('P2','H3','H2'))
+
+estado_inicial_habitaciones_fallo = probpl.Estado(abierta('P1'),
                                             en('C1', 'H1'),
                                             roboten('H1'),
                                             conecta('P1','H1','H2'),
@@ -71,12 +78,41 @@ problema_habitaciones = probpl.ProblemaPlanificación(
                 roboten('H3')]
 )
 
+problema_habitaciones2 = probpl.ProblemaPlanificación(
+    operadores=[irVia,desplazarVia,abrir,cerrar],
+    estado_inicial=estado_inicial_habitaciones,
+    objetivosP=[roboten('H3')]
+)
+
+problema_habitaciones3 = probpl.ProblemaPlanificación(
+    operadores=[irVia,desplazarVia,abrir,cerrar],
+    estado_inicial=estado_inicial_habitaciones,
+    objetivosP=[abierta('P2'),
+                en('C1', 'H3'),
+                roboten('H1')]
+)
+
+problema_habitaciones_fallo = probpl.ProblemaPlanificación(
+    operadores=[irVia,desplazarVia,abrir,cerrar],
+    estado_inicial=estado_inicial_habitaciones_fallo,
+    objetivosP=[abierta('P2'),
+                en('C1', 'H3'),
+                roboten('H1')]
+)
+
+
 auxiliares.predicados = [abierta, en, roboten, conecta]
-Prego.problema=problema_habitaciones
 objetivos1=[abierta('P2'),
                 en('C1', 'H3'),
                 roboten('H3')]
 
-resultado = busqueda_en_profundidad_H(estado_inicial_habitaciones, objetivos1, problema_habitaciones.acciones)
-print('-----Result-------')
-[print(x.nombre) for x in resultado]
+objetivos2=[roboten('H3')]
+
+objetivos3=[abierta('P2'),
+                en('C1', 'H3'),
+                roboten('H1')]
+# resultado = busqueda_en_profundidad_H(estado_inicial_habitaciones, objetivos1, problema_habitaciones.acciones)
+# print('-----Result-------')
+# [print(x.nombre) for x in resultado]
+
+app.busqueda(problema_habitaciones_fallo, objetivos3)
