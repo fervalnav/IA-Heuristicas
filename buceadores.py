@@ -50,6 +50,7 @@
 # )
 
 
+from busquedas import busqueda_en_profundidad_H
 import PlanificacionAutomatica.problema_planificación_pddl as probpl
 import PlanificacionAutomatica.búsqueda_espacio_estados as búsqee
 import Heuristicas
@@ -204,15 +205,18 @@ Prego.problema=problema_buceadores
 objetivosP = [posicion_buceador('B0', 'superficie'),
             posicion_buceador('B1', 'superficie'),
             con_foto_de('C4')]
-result = 0
-for objetivo in objetivosP:
-    result += Prego.nuevoIntento(estado_inicial_buceadores, objetivo)
+# result = 0
+# for objetivo in objetivosP:
+#     result += Prego.nuevoIntento(estado_inicial_buceadores, objetivo)
 
 
-print('-------------------------Result-------------------------')
-# [print(x.nombre) for x in result]
-print(result)
+# print('-------------------------Result-------------------------')
+# # [print(x.nombre) for x in result]
+# print(result)
 
+resultado = busqueda_en_profundidad_H(estado_inicial_buceadores, objetivosP, problema_buceadores.acciones)
+print('-----Result-------')
+[print(x.nombre) for x in resultado]
 # Heuristicas.problema=problema_buceadores
 # result =0
 # for objetivo in objetivosP:

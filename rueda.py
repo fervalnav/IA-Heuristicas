@@ -72,7 +72,10 @@ Prego.problema=problema_rueda_pinchada
 
 objetivosP = [en('rueda-repuesto', 'eje'),en('rueda-pinchada', 'maletero')]
 resultado = busqueda_en_profundidad_H(estado_inicial_rueda, objetivosP, problema_rueda_pinchada.acciones)
+print('-----Result-----')
 [print(x.nombre) for x in resultado]
+
+
 # Heuristicas.problema=problema_rueda_pinchada
 
 # heur=Heuristicas.heuristica(estado_inicial_rueda,en('rueda-repuesto', 'eje')) + Heuristicas.heuristica(estado_inicial_rueda, en('rueda-pinchada', 'maletero'))

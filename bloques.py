@@ -84,19 +84,40 @@ bajar = probpl.EsquemaPlanificación(
     variables={'x': bloques}
 )
 
+
 problema_mundo_bloques = probpl.ProblemaPlanificación(
-    operadores=[agarrar,
-                bajar,
-                apilar,
-                desapilar
-                ],
+    operadores=[apilar,
+                desapilar,
+                agarrar,
+                bajar],
     estado_inicial=estado_inicial_bloques,
-    objetivosP=[sobrelamesa('A'),
-                sobre('C', 'B'),
-                sobre('B', 'A')]
+    objetivosP=[sobrelamesa('A'), despejado('A'),
+    sobrelamesa('B'),
+    sobre('C','B'), despejado('C'),
+    brazolibre()]
 )
 
+problema_mundo_bloques2 = probpl.ProblemaPlanificación(
+    operadores=[apilar,
+                desapilar,
+                agarrar,
+                bajar],
+    estado_inicial=estado_inicial_bloques,
+    objetivosP=[sobrelamesa('C'),
+                sobre('B', 'C'),
+                sobre('A', 'B')]
+)
 
+problema_mundo_bloques3 = probpl.ProblemaPlanificación(
+    operadores=[apilar,
+                desapilar,
+                agarrar,
+                bajar],
+    estado_inicial=estado_inicial_bloques,
+    objetivosP=[sobrelamesa('A'), despejado('A'),
+    sobrelamesa('B'), despejado('B'),
+    agarrado('C')]
+)
 # print(f'Estado inicial:\n{estado_inicial_bloques}')
 # print(f'Objetivos positivos: {problema_mundo_bloques.objetivosP}')
 # print(f'Objetivos negativos: {problema_mundo_bloques.objetivosN}')
@@ -109,18 +130,22 @@ problema_mundo_bloques = probpl.ProblemaPlanificación(
 
 
 Prego.problema=problema_mundo_bloques
+objetivos = []
+# for k, vSet in problema_mundo_bloques.objetivosP:
+#         for v in vSet:
+#             objetivos.append()
+objetivos1=[sobrelamesa('C'),
+                sobre('B', 'C'),
+                sobre('A', 'B')]
+result = 0
 
-objetivosP=[sobre('B', 'A'), sobrelamesa('A'),
-                sobre('C', 'B')]
-# result = []
-
-# for objetivo in objetivosP:
+# for objetivo in objetivos1:
 #     result +=  Prego.nuevoIntento(estado_inicial_bloques, objetivo)
 # print('-------------------------Result-------------------------')
-# [print(x.nombre) for x in result]
+# # [print(x.nombre) for x in result]
 # print(result)
 
-resultado = busqueda_en_profundidad_H(estado_inicial_bloques, objetivosP, problema_mundo_bloques.acciones)
+resultado = busqueda_en_profundidad_H(estado_inicial_bloques, objetivos1, problema_mundo_bloques.acciones)
 print('-----Result-------')
 [print(x.nombre) for x in resultado]
 # Heuristicas.problema=problema_mundo_bloques

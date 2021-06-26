@@ -13,6 +13,7 @@ def get_predicado(name, listaArg):
 
 def incluyeEfectos(p, acciones, usadas=[]):
     lista = []
+    print(p)
     for accion in acciones:
         for clave in p:
             if clave in accion.efectosP.keys() and p[clave]==accion.efectosP[clave]:
@@ -22,3 +23,16 @@ def incluyeEfectos(p, acciones, usadas=[]):
         if uso in lista:
             lista.remove(uso)
     return lista
+
+# def incluyeEfectos(p, acciones, usadas=[]):
+#     lista = []
+#     for accion in acciones:
+#         for clave in p:
+#             if clave in accion.efectosP.keys() and p[clave]==accion.efectosP[clave]:
+#                 lista.append(accion)
+
+#     for uso in usadas:
+#         if uso in lista:
+#             lista.remove(uso)
+#     return lista
+
