@@ -46,38 +46,29 @@ guardar = probpl.AcciónPlanificación(
     efectosN=en('rueda-pinchada', 'suelo')
 )
 
-problema_rueda_pinchada = probpl.ProblemaPlanificación(
+problema_rueda_pinchada1 = probpl.ProblemaPlanificación(
     operadores=[quitar, guardar, sacar, poner],
     estado_inicial=estado_inicial_rueda,
+    objetivosP = [en('rueda-repuesto', 'eje'),en('rueda-pinchada', 'maletero')]
+)
+
+problema_rueda_pinchada2 = probpl.ProblemaPlanificación(
+    operadores=[quitar, guardar, sacar, poner],
+    estado_inicial=probpl.Estado(en('rueda-pinchada', 'eje'),
+                                     en('rueda-repuesto', 'maletero')),
     objetivosP = [en('rueda-repuesto', 'maletero'),en('rueda-pinchada', 'eje')]
 )
 
-# print(f'Estado inicial:\n{estado_inicial_rueda}')
-# print(f'Objetivos positivos: {problema_rueda_pinchada.objetivosP}')
-# print(f'Objetivos negativos: {problema_rueda_pinchada.objetivosN}')
-# busqueda_profundidad = búsqee.BúsquedaEnProfundidad()
-# print('Busqueda en profundidad: ', busqueda_profundidad.buscar(problema_rueda_pinchada))
-
+problema_rueda_pinchada3 = probpl.ProblemaPlanificación(
+    operadores=[quitar, guardar, sacar, poner],
+    estado_inicial=probpl.Estado(en('rueda-pinchada', 'maletero'),
+                                     en('rueda-repuesto', 'eje')),
+    objetivosP = [en('rueda-repuesto', 'maletero'),en('rueda-pinchada', 'eje')]
+)
 
 auxiliares.predicados = [en]
 
+objetivos1 = [en('rueda-repuesto', 'eje'),en('rueda-pinchada', 'maletero')]
+objetivos2y3 = [en('rueda-repuesto', 'maletero'),en('rueda-pinchada', 'eje')]
 
-# result = Prego.nuevoIntento(estado_inicial_rueda, en('rueda-repuesto', 'eje')) + Prego.nuevoIntento(estado_inicial_rueda, en('rueda-pinchada', 'maletero'))
-
-# print('-------------------------Result-------------------------')
-# # [print(x.nombre) for x in reversed(result)]
-# print(result)
-
-objetivosP = [en('rueda-repuesto', 'eje'),en('rueda-pinchada', 'maletero')]
-# resultado = busqueda_en_profundidad_H(estado_inicial_rueda, objetivosP, problema_rueda_pinchada.acciones)
-# print('-----Result-----')
-# [print(x.nombre) for x in resultado]
-
-
-# Heuristicas.problema=problema_rueda_pinchada
-
-# heur=Heuristicas.heuristica(estado_inicial_rueda,en('rueda-repuesto', 'eje')) + Heuristicas.heuristica(estado_inicial_rueda, en('rueda-pinchada', 'maletero'))
-# print('Heuristica: ', heur)
-
-app.busqueda(problema_rueda_pinchada, objetivosP)
-# app.heuristica(problema_rueda_pinchada, objetivosP)
+app.app(problema_rueda_pinchada1, objetivos1)

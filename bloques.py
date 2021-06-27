@@ -83,7 +83,7 @@ bajar = probpl.EsquemaPlanificación(
 )
 
 
-problema_mundo_bloques = probpl.ProblemaPlanificación(
+problema_mundo_bloques1 = probpl.ProblemaPlanificación(
     operadores=[apilar,
                 desapilar,
                 agarrar,
@@ -116,12 +116,19 @@ problema_mundo_bloques3 = probpl.ProblemaPlanificación(
     sobrelamesa('B'), despejado('B'),
     agarrado('C')]
 )
-auxiliares.predicados = [despejado, brazolibre, sobrelamesa, sobre, agarrado]
-Heuristicas.problema = problema_mundo_bloques
 
-objetivos=[sobrelamesa('A'), despejado('A'),
+auxiliares.predicados = [despejado, brazolibre, sobrelamesa, sobre, agarrado]
+
+objetivos1=[sobrelamesa('A'), despejado('A'),
     sobrelamesa('B'), despejado('B'),
     agarrado('C')]
 
+objetivos2=[sobrelamesa('C'),
+                sobre('B', 'C'),
+                sobre('A', 'B')]
+            
+objetivos3=[sobrelamesa('A'), despejado('A'),
+    sobrelamesa('B'), despejado('B'),
+    agarrado('C')]
 
-app.app(problema_mundo_bloques3, objetivos)
+app.app(problema_mundo_bloques1, objetivos1)

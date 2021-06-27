@@ -26,48 +26,6 @@ con_foto_de = probpl.Predicado(cuevas)
 
 auxiliares.predicados=[posicion_buceador,disponible,trabajando,descompresion,tanques_llenos,con_foto_de]
 
-contratar_B0 = probpl.AcciónPlanificación(
-    nombre = 'contratar(B0)',
-    precondicionesP = disponible('B0'),
-    precondicionesN = trabajando('B1'),
-    efectosN = [disponible('B0'), disponible('B1')],
-    efectosP = trabajando('B0'),
-    coste = 10
-)
-contratar_B1 = probpl.AcciónPlanificación(
-    nombre = 'contratar(B1)',
-    precondicionesP = disponible('B1'),
-    precondicionesN = trabajando('B0'),
-    efectosN = disponible('B1'),
-    efectosP = trabajando('B1'),
-    coste = 67
-)
-
-contratar_B2 = probpl.AcciónPlanificación(
-    nombre = 'contratar(B0)',
-    precondicionesP = disponible('B0'),
-    precondicionesN = trabajando('B1'),
-    efectosN = disponible('B2'),
-    efectosP = trabajando('B2'),
-    coste = 10
-)
-contratar_B3 = probpl.AcciónPlanificación(
-    nombre = 'contratar(B1)',
-    precondicionesP = disponible('B1'),
-    precondicionesN = trabajando('B0'),
-    efectosN = disponible('B3'),
-    efectosP = trabajando('B3'),
-    coste = 67
-)
-
-contratar_B4 = probpl.AcciónPlanificación(
-    nombre = 'contratar(B1)',
-    precondicionesP = disponible('B1'),
-    precondicionesN = trabajando('B0'),
-    efectosN = disponible('B4'),
-    efectosP = trabajando('B4'),
-    coste = 67
-)
 contratar = probpl.EsquemaPlanificación(
     nombre = 'contratar({b})',
     precondicionesP = disponible('{b}'),
@@ -166,17 +124,9 @@ problema_buceadores = probpl.ProblemaPlanificación(
                  posicion_buceador('B1', 'superficie'),
                  con_foto_de('C1')])
 
-
-# print(f'Estado inicial:\n{estado_inicial_buceadores}')
-# print(f'Objetivos positivos: {problema_buceadores.objetivosP}')
-# print(f'Objetivos negativos: {problema_buceadores.objetivosN}')
-# busqueda_profundidad = búsqee.BúsquedaEnProfundidadAcotada(cota=15)
-# print('Busqueda en profundidad: ', busqueda_profundidad.buscar(problema_buceadores))
-
-
 objetivosP = [posicion_buceador('B0', 'superficie'),
             posicion_buceador('B1', 'superficie'),
             con_foto_de('C1')]
 
 
-app.busqueda(problema_buceadores, objetivosP)
+app.app(problema_buceadores, objetivosP)

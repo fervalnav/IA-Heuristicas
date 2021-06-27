@@ -70,6 +70,8 @@ abrir = probpl.EsquemaPlanificación(
     dominio={('P1','H1'), ('P1','H2'), ('P2','H2'), ('P2','H3')}
 )
 
+# -----------------------PROBLEMAS
+
 problema_habitaciones = probpl.ProblemaPlanificación(
     operadores=[irVia,desplazarVia,abrir,cerrar],
     estado_inicial=estado_inicial_habitaciones,
@@ -111,8 +113,5 @@ objetivos2=[roboten('H3')]
 objetivos3=[abierta('P2'),
                 en('C1', 'H3'),
                 roboten('H1')]
-# resultado = busqueda_en_profundidad_H(estado_inicial_habitaciones, objetivos1, problema_habitaciones.acciones)
-# print('-----Result-------')
-# [print(x.nombre) for x in resultado]
 
-app.busqueda(problema_habitaciones_fallo, objetivos3)
+app.app(problema_habitaciones, objetivos1)
