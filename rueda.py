@@ -68,7 +68,7 @@ auxiliares.predicados = [en]
 # # [print(x.nombre) for x in reversed(result)]
 # print(result)
 
-objetivosP = [en('rueda-repuesto', 'maletero'),en('rueda-pinchada', 'eje')]
+objetivosP = [en('rueda-repuesto', 'eje'),en('rueda-pinchada', 'maletero')]
 # resultado = busqueda_en_profundidad_H(estado_inicial_rueda, objetivosP, problema_rueda_pinchada.acciones)
 # print('-----Result-----')
 # [print(x.nombre) for x in resultado]
@@ -79,5 +79,5 @@ objetivosP = [en('rueda-repuesto', 'maletero'),en('rueda-pinchada', 'eje')]
 # heur=Heuristicas.heuristica(estado_inicial_rueda,en('rueda-repuesto', 'eje')) + Heuristicas.heuristica(estado_inicial_rueda, en('rueda-pinchada', 'maletero'))
 # print('Heuristica: ', heur)
 
-# app.busqueda(problema_rueda_pinchada, objetivosP)
-app.heuristica(problema_rueda_pinchada, objetivosP)
+app.busqueda(problema_rueda_pinchada, objetivosP)
+# app.heuristica(problema_rueda_pinchada, objetivosP)

@@ -13,7 +13,7 @@ sobrelamesa = probpl.Predicado(bloques)
 sobre = probpl.Predicado(bloques, bloques)
 agarrado = probpl.Predicado(bloques)
 
-auxiliares.predicados = [despejado, brazolibre, sobrelamesa, sobre, agarrado]
+
 
 estado_inicial_bloques = probpl.Estado(
     sobrelamesa('A'), despejado('A'),
@@ -116,51 +116,12 @@ problema_mundo_bloques3 = probpl.ProblemaPlanificación(
     sobrelamesa('B'), despejado('B'),
     agarrado('C')]
 )
-# print(f'Estado inicial:\n{estado_inicial_bloques}')
-# print(f'Objetivos positivos: {problema_mundo_bloques.objetivosP}')
-# print(f'Objetivos negativos: {problema_mundo_bloques.objetivosN}')
-# busqueda_profundidad = búsqee.BúsquedaEnProfundidad()
-# print('Busqueda en profundidad: ', busqueda_profundidad.buscar(problema_mundo_bloques))
+auxiliares.predicados = [despejado, brazolibre, sobrelamesa, sobre, agarrado]
+Heuristicas.problema = problema_mundo_bloques
 
-
-
-
-
-
-objetivos = []
-# for k, vSet in problema_mundo_bloques.objetivosP:
-#         for v in vSet:
-#             objetivos.append()
-objetivos1=[sobrelamesa('A'), despejado('A'),
-    sobrelamesa('B'),
-    sobre('C','B'), despejado('C'),
-    brazolibre()]
-
-objetivos2=[sobrelamesa('C'),
-                sobre('B', 'C'),
-                sobre('A', 'B')]
-
-objetivos3=[sobrelamesa('A'), despejado('A'),
+objetivos=[sobrelamesa('A'), despejado('A'),
     sobrelamesa('B'), despejado('B'),
     agarrado('C')]
 
 
-# result = 0
-
-# for objetivo in objetivos1:
-#     result +=  Prego.prego(estado_inicial_bloques, objetivo)
-# print('-------------------------Result-------------------------')
-# # [print(x.nombre) for x in result]
-# print(result)
-
-# resultado = busquedas.busqueda_en_profundidad_H(estado_inicial_bloques, objetivos1, problema_mundo_bloques.acciones)
-# print('-----Result-------')
-# [print(x.nombre) for x in resultado]
-# Heuristicas.problema=problema_mundo_bloques
-# predicado = sobre('A', 'B')
-# heur=Heuristicas.heuristica(estado_inicial_bloques, predicado)
-# print(heur)
-
-    
-
-app.busqueda(problema_mundo_bloques, objetivos1)
+app.app(problema_mundo_bloques3, objetivos)

@@ -3,30 +3,35 @@ import time
 import Heuristicas
 import PlanificacionAutomatica.búsqueda_espacio_estados as busqee
 
+
+
 def busqueda(problema, objetivo):
     Heuristicas.problema=problema
     inicio=0
     fin=0
+    result = []
     print('Introduzca 1 para búsqueda a ciegas \nIntroduzca 2 para búsqueda con heurística')
-    choose=int(input('Introduzca aqui su opción: '))
+    choose=int(input('\tIntroduzca aqui su opción: '))
     if(choose==1):
-        print('Busqueda a ciegas')
-        option=int(input('Has elegido busqueda a ciegas:\n\tPara utilizar busqueda en anchura introduzca 1\n\tPara utilizar busqueda en profundidad introduzca 2'))
+        print('\nHa elegido busqueda a ciegas:\nPara utilizar busqueda en anchura introduzca 1\nPara utilizar busqueda en profundidad introduzca 2')
+        option=int(input('\tIntroduzca aqui su opción: '))
         if(option==1):
             print('Busqueda en anchura')
             inicio=time.time()
-            result=busqee.BúsquedaEnAnchura().buscar(problema)
+            res = busqee.BúsquedaEnAnchura()
+            result=res.buscar(problema)
             fin=time.time()
         elif(option==2):
             print('Busqueda en profundidad')
             inicio=time.time()
-            result=busqee.BúsquedaEnProfundidad().buscar(problema)
+            res = busqee.BúsquedaEnAnchura()
+            result=res.buscar(problema)
             fin=time.time()
         else:
              print('No has insertado opción válida')
     elif(choose==2):
-        print('Has eligido búsqueda con heurística:\n\tPara utilizar el prego introduzca 1 \n\tPara utilizar delta0 introduzca 2')
-        option=int(input('Introduzca aqui si opción: '))
+        print('\nHa eligido búsqueda con heurística:\nPara utilizar el prego introduzca 1 \nPara utilizar delta0 introduzca 2')
+        option=int(input('\tIntroduzca aqui si opción: '))
         if(option==1):
             print('Prego')
             inicio=time.time()
@@ -39,18 +44,17 @@ def busqueda(problema, objetivo):
             fin=time.time()
             
         else:
-           print('No has insertado opción válida')
+           print('No ha insertado opción válida')
     else:
-        print('No has insertado opción válida')
+        print('No ha insertado opción válida')
     
-    print('-----Resultado-------')
+    print('\n-----Resultado-------')
     if(choose==1 or result=='FALLO'):
         print(result)
     else:
         [print(x.nombre) for x in result]
     tiempo=fin-inicio
-    if(tiempo>0):
-        print('Tiempo tardado:', tiempo)
+    print('\nTiempo tardado:', tiempo)
 
 def heuristica(problema, p):
     Heuristicas.problema=problema
@@ -58,7 +62,7 @@ def heuristica(problema, p):
     fin=0
     result=0
     print('Para utilizar el prego introduzca 1 \nPara utilizar delta0 introduzca 2')
-    option=int(input('Introduzca aqui si opción: '))
+    option=int(input('\tIntroduzca aqui si opción: '))
     if(option==1):
         print('Prego')
         inicio=time.time()
@@ -71,7 +75,27 @@ def heuristica(problema, p):
         for pred in p:
             result+=Heuristicas.delta0(problema.estado_inicial,pred)
         fin=time.time()
+    
     print('Result:', result)
     tiempo=fin-inicio
     print('Tiempo tardado:', tiempo)
+   
+
+def app(problema,objetivo):
+    print('\nIntroduzca 1 si desea obtener la heuristica del problema\nIntroduzca 2 si desea realizar una busqueda del problema\nIntroduzca 3 para salir')
+    choose=int(input('\tIntroduzca aqui su opción: '))
+    if choose==1:
+        print('\nHa elegido obtener la heurística')
+        heuristica(problema, objetivo)
+        app(problema, objetivo)
+    elif choose == 2:
+        print('\nHa elegido realizar una busqueda')
+        busqueda(problema, objetivo)
+        app(problema, objetivo)    
+    elif choose == 3:
+        print('Que tenga un buen día.')
+    else:
+        print('Ha introducido una opción inválida.')
+        app(problema, objetivo)
+    
  
