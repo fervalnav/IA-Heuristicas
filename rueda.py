@@ -68,7 +68,4 @@ problema_rueda_pinchada3 = probpl.ProblemaPlanificación(
 
 auxiliares.predicados = [en]
 
-objetivos1 = [en('rueda-repuesto', 'eje'),en('rueda-pinchada', 'maletero')]
-objetivos2y3 = [en('rueda-repuesto', 'maletero'),en('rueda-pinchada', 'eje')]
-
-app.app(problema_rueda_pinchada1, objetivos1)
+app.app(problema_rueda_pinchada1)

@@ -119,18 +119,5 @@ problema_mundo_bloques3 = probpl.ProblemaPlanificación(
 
 auxiliares.predicados = [despejado, brazolibre, sobrelamesa, sobre, agarrado]
 
-objetivos1=[sobrelamesa('A'), despejado('A'),
-    sobrelamesa('B'), despejado('B'),
-    agarrado('C')]
-
-objetivos2=[sobrelamesa('C'),
-                sobre('B', 'C'),
-                sobre('A', 'B')]
-            
-objetivos3=[sobrelamesa('A'), despejado('A'),
-    sobrelamesa('B'), despejado('B'),
-    agarrado('C')]
-
 app.app(problema_mundo_bloques1)
 
-# print(auxiliares.parseObjetivos(problema_mundo_bloques1.obje1tivosP))

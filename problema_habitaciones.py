@@ -104,14 +104,5 @@ problema_habitaciones_fallo = probpl.ProblemaPlanificación(
 
 
 auxiliares.predicados = [abierta, en, roboten, conecta]
-objetivos1=[abierta('P2'),
-                en('C1', 'H3'),
-                roboten('H3')]
 
-objetivos2=[roboten('H3')]
-
-objetivos3=[abierta('P2'),
-                en('C1', 'H3'),
-                roboten('H1')]
-
-app.app(problema_habitaciones, objetivos1)
+app.app(problema_habitaciones)

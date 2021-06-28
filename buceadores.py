@@ -115,7 +115,7 @@ estado_inicial_buceadores = probpl.Estado(
     disponible('B0'),
     disponible('B1'))
 
-problema_buceadores = probpl.ProblemaPlanificación(
+problema_buceadores1 = probpl.ProblemaPlanificación(
     operadores = [contratar,
                  entrar_al_agua, bucear, fotografiar,
                  cargar_tanque, soltar_tanque, salir_del_agua],
@@ -124,9 +124,15 @@ problema_buceadores = probpl.ProblemaPlanificación(
                  posicion_buceador('B1', 'superficie'),
                  con_foto_de('C1')])
 
-objetivosP = [posicion_buceador('B0', 'superficie'),
-            posicion_buceador('B1', 'superficie'),
-            con_foto_de('C1')]
+problema_buceadores2 = probpl.ProblemaPlanificación(
+    operadores = [contratar,
+                 entrar_al_agua, bucear, fotografiar,
+                 cargar_tanque, soltar_tanque, salir_del_agua],
+    estado_inicial = estado_inicial_buceadores,
+    objetivosP = [posicion_buceador('B0', 'superficie'),
+                 posicion_buceador('B1', 'superficie'),
+                 con_foto_de('C1')])
 
 
-app.app(problema_buceadores, objetivosP)
+
+app.app(problema_buceadores1)
