@@ -131,4 +131,6 @@ objetivos3=[sobrelamesa('A'), despejado('A'),
     sobrelamesa('B'), despejado('B'),
     agarrado('C')]
 
-app.app(problema_mundo_bloques1, objetivos1)
+app.app(problema_mundo_bloques1)
+
+# print(auxiliares.parseObjetivos(problema_mundo_bloques1.obje1tivosP))

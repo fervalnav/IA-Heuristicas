@@ -23,3 +23,9 @@ def incluyeEfectos(p, acciones, usadas=[]):
             lista.remove(uso)
     return lista
 
+def parseObjetivos(objetivos):
+    res = []
+    for (k,values) in objetivos.items():
+        for v in values:
+            res.append(get_predicado(k,[v]))
+    return res

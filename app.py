@@ -1,3 +1,4 @@
+from auxiliares import parseObjetivos
 import busquedas
 import time
 import Heuristicas
@@ -5,8 +6,9 @@ import PlanificacionAutomatica.búsqueda_espacio_estados as busqee
 
 
 
-def busqueda(problema, objetivo):
+def busqueda(problema,objetivo):
     Heuristicas.problema=problema
+    
     inicio=0
     fin=0
     result = []
@@ -81,21 +83,22 @@ def heuristica(problema, p):
     print('Tiempo tardado:', tiempo)
    
 
-def app(problema,objetivo):
+def app(problema):
+    objetivo = parseObjetivos(problema.objetivosP)
     print('\nIntroduzca 1 si desea obtener la heuristica del problema\nIntroduzca 2 si desea realizar una busqueda del problema\nIntroduzca 3 para salir')
     choose=int(input('\tIntroduzca aqui su opción: '))
     if choose==1:
         print('\nHa elegido obtener la heurística')
         heuristica(problema, objetivo)
-        app(problema, objetivo)
+        app(problema)
     elif choose == 2:
         print('\nHa elegido realizar una busqueda')
         busqueda(problema, objetivo)
-        app(problema, objetivo)    
+        app(problema)    
     elif choose == 3:
         print('Que tenga un buen día.')
     else:
         print('Ha introducido una opción inválida.')
-        app(problema, objetivo)
+        app(problema)
     
  
